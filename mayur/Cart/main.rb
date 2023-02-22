@@ -5,24 +5,24 @@ def main
   inventory = Inventory.new(Array.new,Array.new)
   loop do
     print 'Inventory or Shop or End: '
-    track = gets.chomp.downcase
-    case track
+    choice = gets.strip.downcase
+    case choice
     when 'inventory'
       loop do
         print 'AddItem or AddCode or Delete or Display: '
-        operation = gets.chomp.downcase
+        operation = gets.strip.downcase
         case operation
         when 'additem'
           print 'name,price,quantity: '
-          item = gets.chomp.downcase.split(',')
+          item = gets.strip.downcase.split(',')
           inventory.add_item(item[0],item[1].to_i,item[2].to_i)
         when 'addcode'
           print 'code,discount: '
-          item = gets.chomp.downcase.split(',')
+          item = gets.strip.downcase.split(',')
           inventory.add_code(item[0],item[1].to_i)
         when 'delete'
           print 'name: '
-          item = gets.chomp.downcase
+          item = gets.strip.downcase
           inventory.delete_item(item)
         when 'display'
           puts inventory.products
@@ -34,15 +34,15 @@ def main
       loop do
         shop = Shop.new(inventory.products,inventory.codes)
         print 'AddItem or checkout: '
-        operation = gets.chomp.downcase
+        operation = gets.strip.downcase
         case operation
         when 'additem'
           print 'name,quantity: '
-          item = gets.chomp.downcase.split(',')
+          item = gets.strip.downcase.split(',')
           shop.add_to_cart(item[0],item[1].to_i)
         when 'checkout'
           print 'code: '
-          code = gets.chomp.downcase
+          code = gets.strip.downcase
           puts shop.checkout(code)
         else
           break 
