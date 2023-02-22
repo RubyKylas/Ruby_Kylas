@@ -1,3 +1,5 @@
+#hangman test cases
+
 load 'hangman.rb'
 
 describe 'hangman game' do

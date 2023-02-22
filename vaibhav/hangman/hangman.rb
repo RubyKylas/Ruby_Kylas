@@ -1,3 +1,5 @@
+#hangman game
+
 def hangman
     attempts = 6
     words = %w[vaibhav]

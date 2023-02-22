@@ -1,5 +1,6 @@
-load 'shopping_cart.rb'
+#shopping cart test cases
 
+load 'shopping_cart.rb'
 
 describe 'add_Products'  do
   context "when user put product information" do
