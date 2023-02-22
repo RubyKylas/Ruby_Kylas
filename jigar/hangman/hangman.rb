@@ -1,12 +1,12 @@
-$secret_word = "aaabbbcccc"
-$word = $secret_word.split("")
+SECRET_WORD = "aaabbbcccc"
+$word = SECRET_WORD.clone
 $guess_word = " _" * $word.length
 $max_chances = 6
 $correct_guesses = 0
 
 def check_the_guess(letter)
   id = -1
-  if $word.include?(letter)
+  if letter.length == 1 and $word.include?(letter)
     $word[id = $word.index(letter)] = "#"
     puts "\nGood guess! You have guessed the correct letter '#{letter}'."
     $correct_guesses += 1
@@ -27,8 +27,8 @@ def add_letter_to_guess_word(id, letter)
 end
 
 def win?
-  print "\nCongratulations! You guessed the correct word '#{$secret_word}'!\n" if $correct_guesses == $word.length
-  print "\nSorry, you ran out of guesses. The word was '#{$secret_word}'.\n" if $max_chances == 0
+  print "\nCongratulations! You guessed the correct word '#{SECRET_WORD}'!\n" if $correct_guesses == $word.length
+  print "\nSorry, you ran out of guesses. The word was '#{SECRET_WORD}'.\n" if $max_chances == 0
 end
 
 def hangman_game()
