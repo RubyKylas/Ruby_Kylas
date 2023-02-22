@@ -1,16 +1,18 @@
 load 'shop.rb'
 describe Shop do
-    before do
-        products = [
-            {name:"soap",price: 10, quantity: 10},
-            {name:"brush",price: 10, quantity: 10}
-        ]
-        codes = [
-            {code:"CODE",discount:10}
-        ]
-        @shop = Shop.new(products,codes)
-    end
+    
     describe ' #add to cart ' do
+        before(:all) do
+            products = [
+                {name:"soap",price: 10, quantity: 10},
+                {name:"brush",price: 10, quantity: 10}
+            ]
+            codes = [
+                {code:"CODE",discount:10}
+            ]
+            @shop = Shop.new(products,codes)
+        end
+
         context 'When Testing the add to cart method if name or quantity is nil ' do
             it 'should return nil' do 
                 expect(@shop.add_to_cart(nil,10)).to eq (nil)
@@ -31,8 +33,17 @@ describe Shop do
             end
         end
     end
+
     describe ' #checkout ' do
-        before do
+        before(:all) do
+            products = [
+                {name:"soap",price: 10, quantity: 10},
+                {name:"brush",price: 10, quantity: 10}
+            ]
+            codes = [
+                {code:"CODE",discount:10}
+            ]
+            @shop = Shop.new(products,codes)
             @shop.add_to_cart("soap",10)
             @shop.add_to_cart("brush",10)
         end

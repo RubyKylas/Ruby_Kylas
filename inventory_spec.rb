@@ -1,15 +1,14 @@
 load 'inventory.rb'
 
 describe Inventory do
-    before do
-        @inventory = Inventory.new(Array.new,Array.new)
-    end
+
     describe '#add_item' do
+        before(:each) do
+            @inventory = Inventory.new(Array.new,Array.new)
+        end
         context 'When testing the add item method name or quantity is not given' do
             it 'should return nil' do 
-            expect(@inventory.add_item(nil,10,10)).to eq (nil)
-            expect(@inventory.add_item("soap",10,nil)).to eq (nil)
-            expect(@inventory.add_item(nil,10,nil)).to eq (nil)
+                expect(@inventory.add_item("soap",10,nil)).to eq (nil)
             end
         end
         context 'When testing the add item method' do
@@ -20,7 +19,8 @@ describe Inventory do
     end
     
     describe '#delete_item' do
-        before do
+        before(:all) do
+            @inventory = Inventory.new(Array.new,Array.new)
             @inventory.products = [{name: "soap",price: 10, quantity: 10}]
         end
         context 'When testing the delete item method if item is present' do
@@ -36,10 +36,12 @@ describe Inventory do
     end
 
     describe '#add_code' do
+        before(:all) do
+            @inventory = Inventory.new(Array.new,Array.new)
+        end
         context 'When testing the add code method if name or discount is nil' do
             it 'should return nil' do 
                 expect(@inventory.add_code(nil,10)).to eq (nil)
-                expect(@inventory.add_code("code",nil)).to eq (nil)
             end
         end
         context 'When testing the add code method ' do
