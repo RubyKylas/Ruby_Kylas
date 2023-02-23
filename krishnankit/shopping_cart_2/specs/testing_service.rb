@@ -20,19 +20,17 @@ end
 
 describe "inventory.display" do
   context "When display_products function is called." do
-    begin do
+    begin
       inventory = Inventory.new
-      inventory.products = [Product.new('Apple', 50000, 10), Product.new('Asus', 15000, 10)]
+      inventory.products = [Product.new('Apple', 50000), Product.new('Asus', 15000)]
     end
     it "Should print products array." do
       expect do
         inventory.display
       end.to output(%{Name: Apple.
 Price: 50000.
-Quantity: 10
 Name: Asus.
 Price: 15000.
-Quantity: 10.
 }).to_stdout
     end
   end
@@ -40,7 +38,7 @@ end
 
 describe "cart.display" do
   context "When display_cart function is called " do
-    begin do
+    begin
       cart = Cart.new
       cart.products = [[Product.new('Apple', 50000), 3], [Product.new('Asus', 15000), 2]]
     end
@@ -60,7 +58,7 @@ end
 
 describe "cart.generate_bill" do
   context "When user wants a bill and enter FIRST as coupon code." do
-    begin do
+    begin
       cart = Cart.new
       cart.products = [[Product.new('Apple', 50000), 3], [Product.new('Asus', 15000), 2]]
       code = "FIRST"
@@ -76,7 +74,7 @@ Amount payable is: 144000
   end
 
   context "When user wants a bill and enter COUPN as coupon code." do
-    begin do
+    begin
       cart = Cart.new
       cart.products = [[Product.new('Apple', 50000), 3], [Product.new('Asus', 15000), 2]]
       code = "COUPN"
@@ -92,7 +90,7 @@ Amount payable is: 162000
   end
 
   context "When user wants a bill and enter no or wrong as coupon code." do
-    begin do
+    begin
       cart = Cart.new
       cart.products = [[Product.new('Apple', 50000), 3], [Product.new('Asus', 15000), 2]]
       code = ""
@@ -110,7 +108,7 @@ end
 
 describe "cart.add_product" do
   context "When add_product function is called" do
-    begin do
+    begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
       products = [apple, asus]
@@ -125,7 +123,7 @@ describe "cart.add_product" do
   end
 
   context "When add_product function is called and that product is not available in inventory" do
-    begin do
+    begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
       products = [apple, asus]
@@ -143,7 +141,7 @@ end
 
 describe "inventory.add_product" do
   context "When User adds new product." do
-    begin do
+    begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
       inventory = Inventory.new
@@ -158,7 +156,7 @@ end
 
 describe "cart.delete_product" do
   context "When user enters name for product to be deleted." do
-    begin do
+    begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
       cart = Cart.new
@@ -172,7 +170,7 @@ describe "cart.delete_product" do
   end
 
   context "When user enters name for product to be deleted and it is not present in cart." do
-    begin do
+    begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
       cart = Cart.new

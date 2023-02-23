@@ -1,4 +1,4 @@
-load 'E:\Kylas\Ruby\shopping_cart\code\service.rb'
+require_relative '../code/service.rb'
 
 describe "display_menu" do
   context "When display_menu function is called" do
@@ -20,7 +20,7 @@ end
 
 describe "display_products" do
   context "When display_products function is called." do
-    begin do
+    begin
       products = [["Apple", 50000, 10], ["Asus", 15000, 10]]
     end
     it "Should print products array." do
@@ -39,7 +39,7 @@ end
 
 describe "display_cart" do
   context "When display_cart function is called " do
-    begin do
+    begin
       cart = [["Apple", 50000, 3], ["Asus", 15000, 2]]
     end
     it "Cart Should be displayed." do
@@ -58,8 +58,8 @@ end
 
 describe "add_to_cart" do
   context "When add_to_cart function is called" do
-    begin do
-      products = [["Apple", 50000], ["Asus", 15000]]
+    begin
+      products = [["Apple", 50000, 10], ["Asus", 15000, 10]]
       cart  = []
       name = "Apple"
       quantity = 2
@@ -73,21 +73,22 @@ end
 
 describe "add_product" do
   context "When User adds new product." do
-    begin do
-      products = [["Apple", 50000]]
+    begin
+      products = [["Apple", 50000, 10]]
       name = "Asus"
       price = 15000
+      quantity = 10
     end
     it "Product should be added to products." do
-      result = add_product(products, name, price)
-      expect(result).to eq [["Apple", 50000], ["Asus", 15000]]
+      result = add_product(products, name, price, quantity)
+      expect(result).to eq [["Apple", 50000, 10], ["Asus", 15000, 10]]
     end
   end
 end
 
 describe "delete_from_cart" do
   context "When user enters name for product to be deleted." do
-    begin do
+    begin
       cart = [["Apple", 50000, 3], ["Asus", 15000, 2]]
       name = "Apple"
     end
@@ -100,9 +101,8 @@ end
 
 describe "generate_bill" do
   context "When user wants a bill and enter FIRST as coupon code." do
-    begin do
-      cart = Cart.new
-      cart.products = [["Apple", 50000, 3], ["Asus", 15000, 2]]
+    begin
+      cart = [["Apple", 50000, 3], ["Asus", 15000, 2]]
       code = "FIRST"
     end
     it "Bill should be generated with 20% discount." do
