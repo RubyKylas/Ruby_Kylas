@@ -16,7 +16,6 @@ describe Inventory do
 			end
 		end
 	end
-	
 	describe '#delete_item' do
 		before(:all) do
 			@inventory = Inventory.new(Array.new, Array.new)
@@ -33,7 +32,6 @@ describe Inventory do
 			end
 		end
 	end
-
 	describe '#add_code' do
 		before(:all) do
 			@inventory = Inventory.new(Array.new, Array.new)

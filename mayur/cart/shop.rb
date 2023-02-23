@@ -1,11 +1,10 @@
 class Shop
-  
   def initialize(products, codes)
     @cart = Hash.new
     @products = products
     @codes = codes
   end
-
+  
   def add_to_cart(name = nil,need = nil)
     return nil if (name.nil? || need.nil?)
     index = @products.find_index { |p| p[:name] == name }

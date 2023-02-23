@@ -1,8 +1,8 @@
 require './inventory.rb'
 require './shop.rb'
 
-def main
-  inventory = Inventory.new(Array.new, Array.new)
+def main(my_inventory)
+  inventory = my_inventory 
   # User Menu to select Shopping or Inventory Management
   loop do
     print 'Inventory or Shop or End: '
@@ -56,5 +56,3 @@ def main
     end
   end
 end
-
-main()
