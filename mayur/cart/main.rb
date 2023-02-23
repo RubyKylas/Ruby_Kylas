@@ -1,8 +1,8 @@
-require 'inventory.rb'
-require 'shop.rb'
+require './inventory.rb'
+require './shop.rb'
 
 def main
-  inventory = Inventory.new(Array.new,Array.new)
+  inventory = Inventory.new(Array.new, Array.new)
   # User Menu to select Shopping or Inventory Management
   loop do
     print 'Inventory or Shop or End: '

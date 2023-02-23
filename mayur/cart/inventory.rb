@@ -13,7 +13,7 @@ class Inventory
     @products.delete_at(index)
   end
   
-  def add_item(name = nil,price = nil,quantity = nil)
+  def add_item(name = nil, price = nil, quantity = nil)
     return nil if (name.nil? || quantity.nil?) 
     index = @products.find_index { |p| p[:name] == name }
     if !index.nil?
@@ -24,7 +24,7 @@ class Inventory
     @products
   end
 
-  def add_code(code=nil,discount=nil)
+  def add_code(code = nil, discount = nil)
     return nil if (code.nil? || discount.nil?)
     @codes.push({ code: code, discount: discount.to_i })
   end

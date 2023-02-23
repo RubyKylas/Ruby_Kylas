@@ -1,12 +1,12 @@
 class Shop
   
-  def initialize(products,codes)
+  def initialize(products, codes)
     @cart = Hash.new
     @products = products
     @codes = codes
   end
 
-  def add_to_cart(name=nil,need=nil)
+  def add_to_cart(name = nil,need = nil)
     return nil if (name.nil? || need.nil?)
     index = @products.find_index { |p| p[:name] == name }
     if !index.nil?
@@ -31,10 +31,10 @@ class Shop
       @cart
     else
       @cart
+    end
   end
-end
 
-  def checkout(code=nil)
+  def checkout(code = nil)
     total = 0
     @cart.each do |name, data|
       puts "#{name} : #{data[0]} : #{data[1]}"
