@@ -4,11 +4,13 @@ def display_products(products)
     puts x[0]
     print "Price: "
     puts x[1]
+    print "Quantity: "
+    puts x[2]
   end
 end
 
-def add_product(products, name, price)
-  products.push([name, price])
+def add_product(products, name, price, quantity)
+  products.push([name, price, quantity])
   return products
 end
 
@@ -16,6 +18,7 @@ def add_to_cart(products, cart, name, quantity)
   prod = products.find {|x| x[0] == name}
   if prod
     cart.push([name, prod[1], quantity])
+    prod[2] -= quantity
   end
   return cart
 end

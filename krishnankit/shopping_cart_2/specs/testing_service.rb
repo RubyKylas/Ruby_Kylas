@@ -22,15 +22,17 @@ describe "inventory.display" do
   context "When display_products function is called." do
     begin do
       inventory = Inventory.new
-      inventory.products = [Product.new('Apple', 50000), Product.new('Asus', 15000)]
+      inventory.products = [Product.new('Apple', 50000, 10), Product.new('Asus', 15000, 10)]
     end
     it "Should print products array." do
       expect do
         inventory.display
       end.to output(%{Name: Apple.
 Price: 50000.
+Quantity: 10
 Name: Asus.
 Price: 15000.
+Quantity: 10.
 }).to_stdout
     end
   end

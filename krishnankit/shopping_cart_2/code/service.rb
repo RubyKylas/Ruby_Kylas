@@ -1,8 +1,9 @@
 class Product 
-  attr_accessor :name, :price
-  def initialize(name, price)
+  attr_accessor :name, :price, :quantity
+  def initialize(name, price, quantity)
     @name = name
     @price = price
+    @quantity = quantity
   end
 end
 
@@ -22,6 +23,7 @@ class Inventory
     @products.each do |p|
       puts "Name: #{p.name}."
       puts "Price: #{p.price}."
+      puts "Quantity: #{p.quantity}."
     end
   end
 end
@@ -39,6 +41,7 @@ class Cart
     else
       new_product = [product, quantity]
       @products.push(new_product)
+      product.quantity -= quantity
     end
     return @products
   end

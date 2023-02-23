@@ -18,13 +18,24 @@ while 1
       name = gets.chomp.downcase
       print "Enter the price: "
       price = gets.chomp.to_i
-      add_product(products, name, price)
+      print "Enter the quantity: "
+      quantity = gets.chomp.to_i
+      add_product(products, name, price, quantity)
     when 3
       print "Enter the name: "
       name = gets.chomp.downcase
-      print "Enter the quantity: "
-      quantity = gets.chomp.to_i
-      add_to_cart(products, cart, name, quantity)
+      prod = products.find {|x| x[0] == name}
+      if !prod do
+        puts "Product not available."
+      else
+        print "Enter the quantity: "
+        quantity = gets.chomp.to_i
+        if quantity > prod[2]
+          puts "Not enough quantity available."
+        else
+          add_to_cart(products, cart, name, quantity)
+        end
+      end
     when 4 
       display_cart(cart)
     when 5

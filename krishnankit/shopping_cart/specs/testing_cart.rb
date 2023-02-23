@@ -21,15 +21,17 @@ end
 describe "display_products" do
   context "When display_products function is called." do
     begin do
-      products = [["Apple", 50000], ["Asus", 15000]]
+      products = [["Apple", 50000, 10], ["Asus", 15000, 10]]
     end
     it "Should print products array." do
       expect do
         display_products(products)
       end.to output(%{Name: Apple
 Price: 50000
+Quantity: 10
 Name: Asus
 Price: 15000
+Quantity: 10
 }).to_stdout
     end
   end
