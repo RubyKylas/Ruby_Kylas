@@ -1,4 +1,4 @@
-SECRET_WORD = "kylaskylas"
+SECRET_WORD = "aaabbbcccc"
 $word = SECRET_WORD.clone
 $guess_word = " _" * $word.length
 $max_chances = 6
@@ -41,5 +41,3 @@ def hangman_game()
   end 
   win?
 end
-
-# hangman_game
