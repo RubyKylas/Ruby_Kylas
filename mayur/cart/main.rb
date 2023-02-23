@@ -1,13 +1,15 @@
-load 'inventory.rb'
-load 'shop.rb'
+require 'inventory.rb'
+require 'shop.rb'
 
 def main
   inventory = Inventory.new(Array.new,Array.new)
+  # User Menu to select Shopping or Inventory Management
   loop do
     print 'Inventory or Shop or End: '
     choice = gets.strip.downcase
     case choice
     when 'inventory'
+      # User Menu to handle Inventory Management
       loop do
         print 'AddItem or AddCode or Delete or Display: '
         operation = gets.strip.downcase
@@ -15,11 +17,11 @@ def main
         when 'additem'
           print 'name,price,quantity: '
           item = gets.strip.downcase.split(',')
-          inventory.add_item(item[0],item[1].to_i,item[2].to_i)
+          inventory.add_item(item[0], item[1].to_i, item[2].to_i)
         when 'addcode'
           print 'code,discount: '
           item = gets.strip.downcase.split(',')
-          inventory.add_code(item[0],item[1].to_i)
+          inventory.add_code(item[0], item[1].to_i)
         when 'delete'
           print 'name: '
           item = gets.strip.downcase
@@ -31,6 +33,7 @@ def main
         end
       end
     when 'shop'
+      # User Menu to handle shopping
       loop do
         shop = Shop.new(inventory.products,inventory.codes)
         print 'AddItem or checkout: '
@@ -39,7 +42,7 @@ def main
         when 'additem'
           print 'name,quantity: '
           item = gets.strip.downcase.split(',')
-          shop.add_to_cart(item[0],item[1].to_i)
+          shop.add_to_cart(item[0], item[1].to_i)
         when 'checkout'
           print 'code: '
           code = gets.strip.downcase

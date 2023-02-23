@@ -8,7 +8,7 @@ def hangman(word, chances)
   p
   while (letters.length < word.length) && (chances > 0)
     print "Guess it Chances:#{chances} :"
-    letter = gets.chomp
+    letter = gets.strip.downcase
     chances -= 1 if word.count(letter) <= 0 || letters.count(letter) > 0
     word.count(letter).times { letters += letter }
     p word.gsub(/[^#{letters}]/, '_')  if word.count(letter) > 0

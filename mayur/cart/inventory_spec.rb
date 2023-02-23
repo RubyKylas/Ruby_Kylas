@@ -1,4 +1,4 @@
-load 'inventory.rb'
+require 'inventory.rb'
 
 describe Inventory do
 
@@ -8,12 +8,12 @@ describe Inventory do
         end
         context 'When testing the add item method name or quantity is not given' do
             it 'should return nil' do 
-                expect(@inventory.add_item("soap",10,nil)).to eq (nil)
+                expect(@inventory.add_item("soap", 10, nil)).to eq (nil)
             end
         end
         context 'When testing the add item method' do
             it 'should return list of products with new added item' do
-                expect(@inventory.add_item("soap",10,10)).to eq ([{name: "soap",price: 10, quantity: 10}])
+                expect(@inventory.add_item("soap", 10, 10)).to eq ([{name: "soap",price: 10, quantity: 10}])
             end
         end
     end
@@ -21,11 +21,11 @@ describe Inventory do
     describe '#delete_item' do
         before(:all) do
             @inventory = Inventory.new(Array.new,Array.new)
-            @inventory.products = [{name: "soap",price: 10, quantity: 10}]
+            @inventory.products = [{name: "soap", price: 10, quantity: 10}]
         end
         context 'When testing the delete item method if item is present' do
             it 'should give the deleted item' do 
-                expect(@inventory.delete_item("soap")).to eq ({name: "soap",price: 10, quantity: 10})
+                expect(@inventory.delete_item("soap")).to eq ({name: "soap", price: 10, quantity: 10})
             end
         end
         context 'When testing the delete item method if item is not present' do
@@ -41,12 +41,12 @@ describe Inventory do
         end
         context 'When testing the add code method if name or discount is nil' do
             it 'should return nil' do 
-                expect(@inventory.add_code(nil,10)).to eq (nil)
+                expect(@inventory.add_code(nil, 10)).to eq (nil)
             end
         end
         context 'When testing the add code method ' do
             it 'should return the codes with the new code added' do
-                expect(@inventory.add_code("code",10)).to eq ([{ code: "code", discount: 10 }])
+                expect(@inventory.add_code("code", 10)).to eq ([{ code: "code", discount: 10 }])
             end
         end
     end

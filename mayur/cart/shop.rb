@@ -1,4 +1,3 @@
-
 class Shop
   
   def initialize(products,codes)
@@ -12,7 +11,7 @@ class Shop
     index = @products.find_index { |p| p[:name] == name }
     if !index.nil?
       product = @products[index]
-      return nil if need<=0
+      return nil if need <= 0
       if need > product[:quantity]
         need = product[:quantity]
         @products.delete_at(index)
@@ -21,7 +20,7 @@ class Shop
           x[:quantity] - need if x[:name] == name
         end
       end
-      item = @cart.find{ |item_name,item_data|
+      item = @cart.find{ |item_name, item_data|
         name == item_name
       }
       if(item)
@@ -49,4 +48,3 @@ end
     total
   end
 end
-

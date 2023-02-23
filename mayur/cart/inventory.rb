@@ -2,18 +2,18 @@ class Inventory
   
   attr_accessor  :products, :codes
 
-  def initialize(products,codes)
+  def initialize(products, codes)
     @products = products
     @codes = codes
   end
 
-  def delete_item(name=nil)
+  def delete_item(name = nil)
     index = @products.find_index { |p| p[:name] == name }
     return nil if index.nil?
     @products.delete_at(index)
   end
   
-  def add_item(name=nil,price=nil,quantity=nil)
+  def add_item(name = nil,price = nil,quantity = nil)
     return nil if (name.nil? || quantity.nil?) 
     index = @products.find_index { |p| p[:name] == name }
     if !index.nil?
@@ -30,7 +30,3 @@ class Inventory
   end
 
 end
-
-
-
-
