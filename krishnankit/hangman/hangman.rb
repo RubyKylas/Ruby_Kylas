@@ -1,6 +1,6 @@
 def hangman 
-  words = ['krishnankit', 'mayur', 'vaibhav', 'hardik']
-  word = "Mayur".split("")
+  WORDS = ['krishnankit', 'mayur', 'vaibhav', 'hardik'].freeze
+  word = WORDS.sample.split("")
   len = word.length
   dashes = Array.new(len, "-")
   chances = 6
