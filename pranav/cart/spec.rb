@@ -58,12 +58,7 @@ descibe "add_to_menu"
     end 
     
     it "item gets added successfully, in menu key for that item id should return true"       
-      expect_any_instance_of(Kernel).to receive(:gets).and_return("apple")
-      expect_any_instance_of(Kernel).to receive(:gets).and_return(60)
-      expect_any_instance_of(Kernel).to receive(:gets).and_return(15)
-      # add_to_menu("apple", menu, 60, 15)
-      # expect(add_to_menu("apple", menu, 60, 15)).to eq({4 => { name: 'apple', price: 60, quantity: 15 }})
-      # expect(menu.size).to eq(4)
+      expect_any_instance_of(Kernel).to receive(:gets).and_return("apple\n","60\n","15\n")
       expect(menu.key?(4)).to eq(true)
     end
   end  
