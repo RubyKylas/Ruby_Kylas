@@ -1,7 +1,7 @@
 require './shop.rb'
 
 describe Shop do
-	describe ' #add to cart ' do
+	describe '#add_to_cart' do
 		before(:all) do
 			products = [
 				{name:"soap", price: 10, quantity: 10},
@@ -30,7 +30,7 @@ describe Shop do
 			end
 		end
 	end
-	describe ' #checkout ' do
+	describe '#checkout' do
 		before(:all) do
 			products = [
 					{name:"soap", price: 10, quantity: 10},

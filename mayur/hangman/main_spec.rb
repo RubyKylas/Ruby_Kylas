@@ -1,7 +1,7 @@
 require './main.rb'
 
 describe Hangman do
-  describe ' #start ' do
+  describe '#start' do
     before(:all) do
       WORDS = %w[kylas amura selldo beyondwalls].freeze
       @chances = 6

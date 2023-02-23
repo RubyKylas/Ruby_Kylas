@@ -1,6 +1,6 @@
 require './main.rb'
 
-describe ' #main ' do
+describe '#main' do
   context 'When testing main method for inventory choice' do
     context 'when  testing inventory track if item is added' do
       before(:each)do
