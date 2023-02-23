@@ -1,4 +1,4 @@
-SECRET_WORD = "aaabbbcccc"
+SECRET_WORD = "kylaskylas"
 $word = SECRET_WORD.clone
 $guess_word = " _" * $word.length
 $max_chances = 6
