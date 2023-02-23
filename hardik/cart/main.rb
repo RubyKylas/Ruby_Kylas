@@ -32,45 +32,48 @@ end
 
 # GO FOR SHOPPING
 # -------------------------------------------------------
-while true
-  puts 'please select the proper choice'
-  puts '1. view product list'
-  puts '2. add item to cart'
-  puts '3. view cart'
-  puts '4. update cart'
-  puts '5. remove item from cart'
-  puts '6. checkout'
-  puts '7. exit'
-  choice = gets.chomp.to_i
-  case choice
-    when 1
-      view_inventory($product_list)
-    when 2
-      puts 'enter the id of product'
-      index = gets.chomp.to_i
-      puts 'enter the quantity of product'
-      quantity = gets.chomp.to_i
-      add_to_cart(index, quantity)
-    when 3
-      view_cart
-    when 4
-      puts 'please provide the id of the item'
-      index = gets.chomp.to_i
-      puts 'enter quantity'
-      quantity = gets.chomp.to_i
-      update_cart(index, quantity)
-    when 5
-      puts 'enter the id of the product'
-      product_id = gets.chomp.to_i
-      remove_from_cart(product_id)
-    when 6
-      puts 'enter percent discount'
-      discount = gets.chomp.to_i
-      checkout(discount)
-    when 7
-      return
-    else
-      puts 'please select the proper choice'
+def menu
+  while true
+    puts 'please select the proper choice'
+    puts '1. view product list'
+    puts '2. add item to cart'
+    puts '3. view cart'
+    puts '4. update cart'
+    puts '5. remove item from cart'
+    puts '6. checkout'
+    puts '7. exit'
+    choice = gets.chomp.to_i
+    case choice
+      when 1
+        view_inventory($product_list)
+      when 2
+        puts 'enter the id of product'
+        index = gets.chomp.to_i
+        puts 'enter the quantity of product'
+        quantity = gets.chomp.to_i
+        add_to_cart(index, quantity)
+      when 3
+        view_cart
+      when 4
+        puts 'please provide the id of the item'
+        index = gets.chomp.to_i
+        puts 'enter quantity'
+        quantity = gets.chomp.to_i
+        update_cart(index, quantity)
+      when 5
+        puts 'enter the id of the product'
+        product_id = gets.chomp.to_i
+        remove_from_cart(product_id)
+      when 6
+        puts 'enter percent discount'
+        discount = gets.chomp.to_i
+        checkout(discount)
+      when 7
+        return
+      else
+        puts 'please select the proper choice'
+    end
   end
 end
+menu()
 # -------------------------------------------------------

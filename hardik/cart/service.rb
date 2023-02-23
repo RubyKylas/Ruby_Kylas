@@ -51,7 +51,7 @@ def update_cart(index, quantity)
   actual_index = $cart_list.find_index do |item|
     item['id'] == index
   end
-  if actual_index
+  if actual_index && $product_list[index]['quantity'] >= quantity
     $cart_list[actual_index]['quantity'] = quantity
     return true
   end
