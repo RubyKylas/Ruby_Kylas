@@ -1,6 +1,5 @@
 def hangman 
   words = ['krishnankit', 'mayur', 'vaibhav', 'hardik']
-  # word = words.sample.split("")
   word = "Mayur".split("")
   len = word.length
   dashes = Array.new(len, "-")
