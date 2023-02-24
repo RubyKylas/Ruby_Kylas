@@ -34,9 +34,9 @@ def main(my_inventory)
       end
     when 'shop'
       # User Menu to handle shopping
+      shop = Shop.new(inventory.products,inventory.codes)
       loop do
-        shop = Shop.new(inventory.products,inventory.codes)
-        print 'AddItem or checkout: '
+        print 'AddItem or checkout or Display: '
         operation = gets.strip.downcase
         case operation
         when 'additem'
@@ -47,6 +47,8 @@ def main(my_inventory)
           print 'code: '
           code = gets.strip.downcase
           puts shop.checkout(code)
+        when 'display'
+          shop.display_cart()
         else
           break 
         end

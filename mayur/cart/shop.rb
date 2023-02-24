@@ -1,10 +1,14 @@
 class Shop
   def initialize(products, codes)
-    @cart = Hash.new
+    @cart = {}
     @products = products
     @codes = codes
   end
-  
+
+  def display_cart()
+    puts @cart
+  end
+
   def add_to_cart(name = nil,need = nil)
     return nil if (name.nil? || need.nil?)
     index = @products.find_index { |p| p[:name] == name }
@@ -15,7 +19,7 @@ class Shop
         need = product[:quantity]
         @products.delete_at(index)
       else
-        @products.each do |x|
+        @products.map do |x|
           x[:quantity] - need if x[:name] == name
         end
       end
@@ -27,17 +31,19 @@ class Shop
       else
         @cart[name] = [product[:price], need]
       end
-      @cart
+      puts @cart
     else
-      @cart
+      puts @cart
     end
   end
 
   def checkout(code = nil)
     total = 0
+    puts @cart
     @cart.each do |name, data|
       puts "#{name} : #{data[0]} : #{data[1]}"
       total += data[0] * data[1]
+      puts total
     end
     if code
       @codes.each do |x|

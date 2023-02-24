@@ -1,6 +1,6 @@
 class Inventory
   attr_accessor  :products, :codes
-  def initialize(products, codes)
+  def initialize(products = [], codes = {})
     @products = products
     @codes = codes
   end
