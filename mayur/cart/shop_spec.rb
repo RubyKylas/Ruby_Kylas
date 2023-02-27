@@ -1,4 +1,4 @@
-require './shop.rb'
+require './shop'
 
 describe Shop do
 	describe '#add_to_cart' do

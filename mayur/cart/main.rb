@@ -1,7 +1,7 @@
-require './inventory.rb'
-require './shop.rb'
+require './inventory'
+require './shop'
 
-def main(my_inventory)
+def main(my_inventory = Inventory.new)
   inventory = my_inventory 
   # User Menu to select Shopping or Inventory Management
   loop do

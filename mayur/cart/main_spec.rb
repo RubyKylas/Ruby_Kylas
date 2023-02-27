@@ -1,4 +1,4 @@
-require './main.rb'
+require './main'
 
 describe '#main' do
   context 'When testing main method for inventory choice' do

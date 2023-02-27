@@ -31,9 +31,9 @@ class Shop
       else
         @cart[name] = [product[:price], need]
       end
-      puts @cart
+      @cart
     else
-      puts @cart
+      @cart
     end
   end
 
@@ -46,9 +46,10 @@ class Shop
       puts total
     end
     if code
-      @codes.each do |x|
-        total -= total * x[:discount] / 100 if code == x[:code]
+      apply_code = @codes.find do |x|
+        x[:code] == code
       end
+      total -= total * apply_code[:discount] / 100 if apply_code
     end
     total
   end

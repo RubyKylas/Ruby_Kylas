@@ -1,9 +1,9 @@
-require './inventory.rb'
+require './inventory'
 
 describe Inventory do
 	describe '#add_item' do
 		before(:each) do
-			@inventory = Inventory.new(Array.new, Array.new)
+			@inventory = Inventory.new()
 		end
 		context 'When testing the add item method name or quantity is not given' do
 			it 'should return nil' do 
@@ -17,24 +17,24 @@ describe Inventory do
 		end
 	end
 	describe '#delete_item' do
-		before(:all) do
-			@inventory = Inventory.new(Array.new, Array.new)
-			@inventory.products = [{name: "soap", price: 10, quantity: 10}]
+		before(:each) do
+			@inventory = Inventory.new()
+			@inventory.products = [{name: "soap", price: 10, quantity: 10},{name: "pen", price: 10, quantity: 10}]
 		end
 		context 'When testing the delete item method if item is present' do
 			it 'should give the deleted item' do 
-				expect(@inventory.delete_item("soap")).to eq ({name: "soap", price: 10, quantity: 10})
+				expect(@inventory.delete_item("soap")).to eq ([{name: "pen", price: 10, quantity: 10}])
 			end
 		end
 		context 'When testing the delete item method if item is not present' do
-			it 'should give nil' do
-				expect(@inventory.delete_item("vim")).to eq (nil)
+			it 'should give array as it is' do
+				expect(@inventory.delete_item("vim")).to eq ([{name: "soap", price: 10, quantity: 10},{name: "pen", price: 10, quantity: 10}])
 			end
 		end
 	end
 	describe '#add_code' do
 		before(:all) do
-			@inventory = Inventory.new(Array.new, Array.new)
+			@inventory = Inventory.new()
 		end
 		context 'When testing the add code method if name or discount is nil' do
 			it 'should return nil' do 
