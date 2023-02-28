@@ -12,7 +12,7 @@ class Inventory
         @givenArray = [["orange",120,5]]
 
         if @givenArray.find { |x| x[0] == productName }
-          puts 'u cant use same name as previous product'
+          puts 'You cant use same name as previous product'
           return 'product exist'
         else
           print 'enter product value: '
