@@ -74,35 +74,35 @@ descibe "add_to_cart"
     it "item gets added successfully, quantity for that item in cart should increase"       
       expect_any_instance_of(Kernel).to receive(:gets).and_return(3)
       expect_any_instance_of(Kernel).to receive(:gets).and_return(6)
-      add_to_cart(3,6, menu, cart)
+      add_to_cart(3, 6, menu, cart)
       expect(cart[3][:quantity]).to eq(6)
     end
     
     it "item gets added successfully quantity for that item in menu should decrease"       
       expect_any_instance_of(Kernel).to receive(:gets).and_return(3)
       expect_any_instance_of(Kernel).to receive(:gets).and_return(6)
-      add_to_cart(3,6, menu, cart)
+      add_to_cart(3, 6, menu, cart)
       expect(menu[3][:quantity]).to eq(1)
     end
     
     it "menu does not have sufficient quantity cart size should remain as before"       
       expect_any_instance_of(Kernel).to receive(:gets).and_return(3)
       expect_any_instance_of(Kernel).to receive(:gets).and_return(8)
-      add_to_cart(3,8, menu, cart)
+      add_to_cart(3, 8, menu, cart)
       expect(cart.size).to eq(2)
     end
     
     it "menu does not have sufficient quantity, menu should retain quantity of that product"       
       expect_any_instance_of(Kernel).to receive(:gets).and_return(3)
       expect_any_instance_of(Kernel).to receive(:gets).and_return(8)
-      add_to_cart(3,8, menu, cart)
+      add_to_cart(3, 8, menu, cart)
       expect(menu[3][:quantity]).to eq(7)
     end
     
     it "item does not exists, in menu key for that item id should return false"       
       expect_any_instance_of(Kernel).to receive(:gets).and_return(6)
       expect_any_instance_of(Kernel).to receive(:gets).and_return(8)
-      add_to_cart(6,8, menu, cart)
+      add_to_cart(6, 8, menu, cart)
       expect(menu.key?(6)).to eq(false)
     end
   end  
@@ -121,9 +121,3 @@ descibe "remove_item_from_cart"
     end
   end  
 end 
-
-
-
- 
-
-
