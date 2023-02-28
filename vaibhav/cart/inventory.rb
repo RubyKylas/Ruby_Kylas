@@ -5,17 +5,26 @@ class Inventory
     @@cart = Array.new{{}}
     
     def Add_Products(ary)
+
         print 'Enter product name: '
         productName = gets
-        print 'enter product value: '
-        productValue = gets
-        print 'Enter product quantity: '
-        productQuantity = gets
-        @@ary.push([productName, productValue, productQuantity])
+
+        @givenArray = [["orange",120,5]]
+
+        if @givenArray.find { |x| x[0] == productName }
+          puts 'u cant use same name as previous product'
+          return 'product exist'
+        else
+          print 'enter product value: '
+          productValue = gets
+          print 'Enter product quantity: '
+          productQuantity = gets
+          @@ary.push([productName, productValue, productQuantity])
+        end
     end
   
     def DisplayAll(ary)
-      puts "\ndisplaying all the products"
+      puts '\ndisplaying all the products'
       puts ' '
       puts 'Name  Cost  Quantity'
       @@ary = [["apple",120,5],["orange",150,10]]
