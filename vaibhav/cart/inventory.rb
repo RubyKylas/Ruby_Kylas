@@ -26,12 +26,18 @@ class Inventory
     def DisplayAll(ary)
       puts '\ndisplaying all the products'
       puts ' '
-      puts 'Name  Cost  Quantity'
       @@ary = [["apple",120,5],["orange",150,10]]
-      @@ary.each do |r|
-        puts r.each { |p| p }. join(' ')
+
+
+      if @@ary.length == 0
+        return 'inventory is empty'
+      else
+        puts 'Name  Cost  Quantity'
+        @@ary.each do |r|
+          puts r.each { |p| p }. join(' ')
+        end
+        return @@ary
       end
-      return @@ary
     end
   
     def Display_menu

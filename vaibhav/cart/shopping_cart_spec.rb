@@ -14,8 +14,6 @@ describe 'add_Products'  do
         it "add products to inventory" do
           
             expect_any_instance_of(Kernel).to receive(:gets).and_return("apple",120,5)
-            # expect_any_instance_of(Kernel).to receive(:gets).and_return(120)
-            # expect_any_instance_of(Kernel).to receive(:gets).and_return(5)
             result = @inv_object.Add_Products([])
             expect(result).to eq(@givenArray)
       end
@@ -43,7 +41,6 @@ describe 'add_Products'  do
           it "add product to cart" do
            
             expect_any_instance_of(Kernel).to receive(:gets).and_return("orange",5)
-            # expect_any_instance_of(Kernel).to receive(:gets).and_return(5)
             result = @cart_object.AddTo_cart([],[])
             expect(result).to eq(@givenArray)
         end

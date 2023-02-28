@@ -26,17 +26,21 @@ class Shopping_cart
 
       
     def Display_cart(cart)
-        puts "\ndisplaying your cart"
-        puts ' '
-        puts 'Name  Cost  Quantity'
+        puts '\ndisplaying your cart'
 
         @@cart = [["apple",120,5]]
 
-        @@cart.each do |r|
-          puts r.each { |p| p }. join(' ')
+        if @@ary.length == 0
+          return 'inventory is empty'
+        else
+          puts ' '
+          puts 'Name  Cost  Quantity'
+          @@cart.each do |r|
+            puts r.each { |p| p }. join(' ')
+          end
         end
-        puts ' '
-        return @@cart
+          puts ' '
+          return @@cart
     end
 
 
@@ -64,17 +68,12 @@ class Shopping_cart
 
         @@cart = [["apple",100,5],["orange",100,10]]
 
-      
         if referal.include?(refName)
-          for i in @@cart
-            amount += i[1].to_i*i[2].to_i
-          end
+          amount = @@cart.inject(0) { |amount, i| amount + i[1].to_i*i[2].to_i }
           amount -= amount*5/100
 
         else
-          for i in @@cart
-            amount += i[1].to_i*i[2].to_i
-          end
+          amount = @@cart.inject(0) { |amount, i| amount + i[1].to_i*i[2].to_i }
         end
         
         Display_bill(amount,cart)
