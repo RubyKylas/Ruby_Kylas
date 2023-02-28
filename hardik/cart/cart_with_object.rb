@@ -17,7 +17,7 @@ class Cart
     quantity = gets.chomp.to_i
     print "Enter the price of product:\t"
     price = gets.chomp.to_i
-    @products.push({ 'name' => name, 'quantity' => quantity, 'price' => price})
+    @products.push({ 'name' => name, 'quantity' => quantity, 'price' => price })
   end
   # ------------------------------------------
 
@@ -41,7 +41,7 @@ class Cart
   def view_product
     puts "Id \t Name \t Quantity \t Price"
     puts '------------------------------------------'
-    @products.each_with_index do |item,index|
+    @products.each_with_index do |item, index|
       puts "#{index} \t #{item['name']} \t #{item['quantity']} \t\t #{item['price']}"
     end
     puts '------------------------------------------'
@@ -60,11 +60,11 @@ class Cart
     if check_item && check_item['quantity'] >= quantity
       @products[id]['quantity'] = @products[id]['quantity'] - quantity
       @cart_item.push({
-        'id' => id,
-        'quantity' => quantity,
-        'name' => check_item['name'],
-        'price' => (check_item['price'] * quantity)
-      })
+                        'id' => id,
+                        'quantity' => quantity,
+                        'name' => check_item['name'],
+                        'price' => (check_item['price'] * quantity)
+                      })
     else
       puts 'invalid product or quantity'
     end
@@ -87,7 +87,7 @@ class Cart
   def view_cart
     puts "Id \t Name \t Quantity \t Price"
     puts '------------------------------------------'
-    @cart_item.each_with_index do |item,index|
+    @cart_item.each_with_index do |item, index|
       puts "#{index} \t #{item['name']} \t #{item['quantity']} \t\t #{item['price']}"
     end
     puts '------------------------------------------'
