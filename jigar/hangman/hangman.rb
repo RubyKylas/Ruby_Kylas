@@ -1,38 +1,36 @@
-SECRET_WORD = "aaabbbcccc"
-$word = SECRET_WORD.clone
-$guess_word = " _" * $word.length
+SECRET_WORD = "abbbccabxc"
+$guess_word = " _" * SECRET_WORD.length
+$guessed_letters = Array.new
 $max_chances = 6
-$correct_guesses = 0
 
 def check_the_guess(letter)
-  id = -1
-  if letter.length == 1 and $word.include?(letter)
-    $word[id = $word.index(letter)] = "#"
+  if letter.length == 1 && SECRET_WORD.include?(letter) && !$guessed_letters.include?(letter)
     puts "\nGood guess! You have guessed the correct letter '#{letter}'."
-    $correct_guesses += 1
+    $guessed_letters.push(letter)
+    add_letter_to_guess_word(letter) 
   else
     puts "\nSorry, You have guessed the wrong letter '#{letter}'."
     $max_chances -= 1
   end
-  add_letter_to_guess_word(id, letter) 
+  return $guess_word
 end
 
 def game_is_over_or_not?
-  $max_chances == 0 || $correct_guesses == $word.length
+  $max_chances == 0 || $guess_word.include?('_') == false
 end
 
-def add_letter_to_guess_word(id, letter)
-  $guess_word[2 * id + 1] = letter if id >= 0
+def add_letter_to_guess_word(letter)
+  SECRET_WORD.chars.each_with_index {|ch, id| $guess_word[2 * id + 1] = letter if ch == letter}
   return $guess_word
 end
 
 def win?
-  print "\nCongratulations! You guessed the correct word '#{SECRET_WORD}'!\n" if $correct_guesses == $word.length
+  print "\nCongratulations! You guessed the correct word '#{SECRET_WORD}'!\n" if $guess_word.include?('_') == false
   print "\nSorry, you ran out of guesses. The word was '#{SECRET_WORD}'.\n" if $max_chances == 0
 end
 
 def hangman_game()
-  puts "Welcome to Hangman! The word has #{$word.length} letters."
+  puts "Welcome to Hangman! The word has #{SECRET_WORD.length} letters."
   while not game_is_over_or_not?
     puts "\nChances left: #{$max_chances}\n"
     print "\nEnter a letter: "
@@ -41,3 +39,4 @@ def hangman_game()
   end 
   win?
 end
+
