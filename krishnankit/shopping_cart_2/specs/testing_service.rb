@@ -22,15 +22,17 @@ describe "inventory.display" do
   context "When display_products function is called." do
     begin
       inventory = Inventory.new
-      inventory.products = [Product.new('Apple', 50000), Product.new('Asus', 15000)]
+      inventory.products = [[Product.new('Apple', 50000), 10], [Product.new('Asus', 15000), 10]]
     end
     it "Should print products array." do
       expect do
         inventory.display
       end.to output(%{Name: Apple.
 Price: 50000.
+Quantity: 10.
 Name: Asus.
 Price: 15000.
+Quantity: 10.
 }).to_stdout
     end
   end
@@ -111,7 +113,7 @@ describe "cart.add_product" do
     begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
-      products = [apple, asus]
+      products = [[apple, 10], [asus, 10]]
       cart  = Cart.new
       name = "Apple"
       quantity = 2
@@ -119,6 +121,8 @@ describe "cart.add_product" do
     it "Product should be added to cart" do
       result = cart.add_product(name, quantity, products)
       expect(result).to eql [[apple, 2]]
+      product = products.find{|p| p[0].name == name}
+      expect(product[1]).to eql(8)      
     end
   end
 
@@ -126,7 +130,7 @@ describe "cart.add_product" do
     begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
-      products = [apple, asus]
+      products = [[apple, 10], [asus, 10]]
       cart  = Cart.new
       name = "Realme"
       quantity = 2
@@ -137,6 +141,22 @@ describe "cart.add_product" do
       end.to output("Product is not available.\n").to_stdout
     end
   end
+
+  context "When add_product function is called and that product is not availabe in sufficient quantity." do
+    begin
+      apple = Product.new('Apple', 50000)
+      asus = Product.new('Asus', 15000)
+      products = [[apple, 10], [asus, 10]]
+      cart  = Cart.new
+      name = "Asus"
+      quantity = 12
+    end
+    it "User should see product not available in sufficient quantity." do
+      expect do
+        cart.add_product(name, quantity, products)
+      end.to output("Product not availabe in sufficient quantity.\n"). to_stdout
+    end
+  end
 end
 
 describe "inventory.add_product" do
@@ -145,11 +165,11 @@ describe "inventory.add_product" do
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
       inventory = Inventory.new
-      inventory.products = [apple]
+      inventory.products = [[apple,10]]
     end
     it "Product should be added to products." do
-      result = inventory.add_product(asus)
-      expect(result).to eq [apple, asus]
+      result = inventory.add_product(asus, 10)
+      expect(result).to eq [[apple, 10], [asus, 10]]
     end
   end
 end

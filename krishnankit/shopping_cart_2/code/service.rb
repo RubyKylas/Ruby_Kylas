@@ -13,15 +13,16 @@ class Inventory
     @products = Array.new
   end
 
-  def add_product(new_product)
-    @products.push(new_product)
+  def add_product(new_product, quantity)
+    @products.push([new_product, quantity])
     return @products
   end
 
   def display
     @products.each do |p|
-      puts "Name: #{p.name}."
-      puts "Price: #{p.price}."
+      puts "Name: #{p[0].name}."
+      puts "Price: #{p[0].price}."
+      puts "Quantity: #{p[1]}."
     end
   end
 end
@@ -33,12 +34,15 @@ class Cart
   end
 
   def add_product(name, quantity, products)
-    product = products.find{|p| p.name == name}
-    if !product
-      puts "Product is not available."      
+    product = products.find{|p| p[0].name == name}
+    if (!product)
+      puts "Product is not available."     
+    elsif (product[1] < quantity)
+      puts "Product not availabe in sufficient quantity." 
     else
-      new_product = [product, quantity]
+      new_product = [product[0], quantity]
       @products.push(new_product)
+      product[1] -= quantity
     end
     return @products
   end

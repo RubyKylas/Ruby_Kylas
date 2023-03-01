@@ -17,8 +17,10 @@ while 1
       name = gets.chomp.downcase
       print "Enter the price: "
       price = gets.chomp.to_i
+      print "Enter the quantity: "
+      quantity = gets.chomp.to_i
       new_product = Product.new(name, price)
-      inventory.add_product(new_product)
+      inventory.add_product(new_product, quantity)
     when 3
       print "Enter the name: "
       name = gets.chomp.downcase

@@ -77,5 +77,3 @@ def display_menu
   puts "5. Generate Bill."
   puts "6. Delete product from cart."
 end
-
-
