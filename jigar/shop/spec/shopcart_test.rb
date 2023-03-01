@@ -1,12 +1,12 @@
 require '/home/dell/ruby_Kylas/jigar/shop/shopcart'
 
-describe "Shop_cart" do
+describe "Shop" do
   before do
     $stock = {}
     $cart = {}
   end
 
-  describe "Testing of add_product_to_stock => " do
+  describe "#add_product_to_stock:" do
     it "it should add the new product in the stock" do
       expect_any_instance_of(Kernel).to receive(:gets).and_return("Oneplus buds\n", "12.4 mm driver size\n", "1500.00\n", "20\n")
       add_product_to_stock
@@ -14,10 +14,9 @@ describe "Shop_cart" do
     end
   end
 
-  describe "Testing of list_all_products => " do
+  describe "#list_all_products:" do
     context "when stock is empty" do
       it "then it should give an error message" do
-        $stock = {}
         expect{list_all_products}.to output("\nStock is empty\n").to_stdout
       end
     end
@@ -33,15 +32,14 @@ describe "Shop_cart" do
     end
   end
 
-  describe "Testing of add_product_to_cart => " do
+  describe "#add_product_to_cart:" do
 
     context "when there's enough quantity of product in the stock" do
       context "and the product is new to the cart" do
-        before(:each) do
+        before do
           $stock = {
             "SONY TV" => {:description => "43 inch LED", :price => 45000.0, :quantity => 50},
           }
-          $cart = {}  
         end
         it "then it should add a product in the cart and cart size increases by 1" do  
           expect_any_instance_of(Kernel).to receive(:gets).and_return("SONY TV\n", "10\n")
@@ -60,7 +58,7 @@ describe "Shop_cart" do
         end                
       end
       context "and the product has already added in the cart" do
-        before(:each) do
+        before do
           $stock = {
             "SONY TV" => {:description => "43 inch LED", :price => 45000.0, :quantity => 40},
           }
@@ -90,11 +88,10 @@ describe "Shop_cart" do
       end
     end
     context "when there's not enough quantity of product in the stock" do
-      before(:each) do
+      before do
         $stock = {
           "SONY TV" => {:description => "43 inch LED", :price => 45000.0, :quantity => 50},
         }
-        $cart = {}
       end
       it "then it should give an error message" do
         expect_any_instance_of(Kernel).to receive(:gets).and_return("SONY TV\n", "60\n")
@@ -112,11 +109,10 @@ describe "Shop_cart" do
       end
     end
     context "when the product is not found in the stock" do
-      before(:each) do
+      before do
         $stock = {
           "SONY TV" => {:description => "43 inch LED", :price => 45000.0, :quantity => 50},
         }
-        $cart = {}
       end
       it "then it should give an error message" do
         expect_any_instance_of(Kernel).to receive(:gets).and_return("NOISE\n")
@@ -135,7 +131,7 @@ describe "Shop_cart" do
     end
   end
   
-  describe "Testing of generate_bill => " do
+  describe "#generate_bill:" do
     
     context "when cart is empty" do
       it "then it should give an error message" do
@@ -154,5 +150,4 @@ describe "Shop_cart" do
     end
   end
 end
-  
-  
+

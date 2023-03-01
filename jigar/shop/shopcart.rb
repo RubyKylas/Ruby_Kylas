@@ -107,7 +107,7 @@ def generate_bill
   has_any_offer?(total_cost)
 end
 
-def shop_cart()
+def shop()
   loop do
     puts "\n------------------------------------------"
     puts "Select an option:"
@@ -134,3 +134,4 @@ def shop_cart()
     end
   end
 end
+

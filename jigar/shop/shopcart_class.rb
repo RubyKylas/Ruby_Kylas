@@ -1,4 +1,4 @@
-class Shop_cart
+class Shop
   attr_accessor :stock, :cart
   def initialize()
     @stock = {}
@@ -142,3 +142,4 @@ class Shop_cart
     end
   end
 end
+
