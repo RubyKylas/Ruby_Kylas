@@ -7,7 +7,7 @@ describe Inventory do
 		end
 		context 'When testing the add item method name or quantity is not given' do
 			it 'should return nil' do 
-				expect(@inventory.add_item("soap", 10, nil)).to eq (nil)
+				expect(@inventory.add_item("soap", 10, nil)).to eq ([])
 			end
 		end
 		context 'When testing the add item method' do
@@ -38,7 +38,7 @@ describe Inventory do
 		end
 		context 'When testing the add code method if name or discount is nil' do
 			it 'should return nil' do 
-				expect(@inventory.add_code(nil, 10)).to eq (nil)
+				expect(@inventory.add_code(nil, 10)).to eq ([])
 			end
 		end
 		context 'When testing the add code method ' do

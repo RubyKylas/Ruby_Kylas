@@ -1,20 +1,29 @@
 class Shop
-  def initialize(products, codes)
+
+  attr_reader :products, :codes
+
+  def initialize(products = {}, codes = {})
     @cart = {}
     @products = products
     @codes = codes
   end
 
-  def display_cart()
+  def update_inventory(products, codes)
+    @products = products
+    @codes = codes
+  end
+
+  def display()
     puts @cart
   end
 
   def add_to_cart(name = nil,need = nil)
-    return nil if (name.nil? || need.nil?)
+    need = need.to_i
+    return @cart if (name.nil? || need.nil?)
     index = @products.find_index { |p| p[:name] == name }
     if !index.nil?
       product = @products[index]
-      return nil if need <= 0
+      return @cart if need <= 0
       if need > product[:quantity]
         need = product[:quantity]
         @products.delete_at(index)
@@ -35,11 +44,11 @@ class Shop
     else
       @cart
     end
+    @cart
   end
 
   def checkout(code = nil)
     total = 0
-    puts @cart
     @cart.each do |name, data|
       puts "#{name} : #{data[0]} : #{data[1]}"
       total += data[0] * data[1]

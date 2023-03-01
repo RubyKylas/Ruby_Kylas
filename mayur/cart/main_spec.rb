@@ -9,7 +9,9 @@ describe '#main' do
       it 'should add the item' do
         expect_any_instance_of(Kernel).to receive(:gets).and_return('inventory')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('additem')
-        expect_any_instance_of(Kernel).to receive(:gets).and_return('soap,10,10')
+        expect_any_instance_of(Kernel).to receive(:gets).and_return('soap')
+        expect_any_instance_of(Kernel).to receive(:gets).and_return('10')
+        expect_any_instance_of(Kernel).to receive(:gets).and_return('10')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('end')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('end')
         main(@inventory)
@@ -23,7 +25,8 @@ describe '#main' do
       it 'should add the item' do
         expect_any_instance_of(Kernel).to receive(:gets).and_return('inventory')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('addcode')
-        expect_any_instance_of(Kernel).to receive(:gets).and_return('soap,10')
+        expect_any_instance_of(Kernel).to receive(:gets).and_return('soap')
+        expect_any_instance_of(Kernel).to receive(:gets).and_return('10')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('end')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('end')
         main(@inventory)
@@ -53,7 +56,8 @@ describe '#main' do
       it 'should add the item' do
         expect_any_instance_of(Kernel).to receive(:gets).and_return('shop')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('additem')
-        expect_any_instance_of(Kernel).to receive(:gets).and_return('soap,10')
+        expect_any_instance_of(Kernel).to receive(:gets).and_return('soap')
+        expect_any_instance_of(Kernel).to receive(:gets).and_return('10')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('end')
         expect_any_instance_of(Kernel).to receive(:gets).and_return('end')
         main(@inventory)

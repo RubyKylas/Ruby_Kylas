@@ -14,19 +14,38 @@ describe Shop do
 		end
 		context 'When Testing the add to cart method if name or quantity is nil ' do
 			it 'should return nil' do 
-				expect(@shop.add_to_cart(nil, 10)).to eq (nil)
-				expect(@shop.add_to_cart("soap", nil)).to eq (nil)
+				expect(@shop.add_to_cart(nil, 10)).to eq ({})
+				expect(@shop.add_to_cart("soap", nil)).to eq ({})
 			end
 		end
 		context 'When Testing the add to cart method if item is not present ' do
 			it 'should return nil' do 
-				expect(@shop.add_to_cart("watch", nil)).to eq (nil)
+				expect(@shop.add_to_cart("watch", nil)).to eq ({})
 			end
 		end
 		context 'When Testing the add to cart method if item is present ' do
 			it 'should return updated cart' do 
 				expect(@shop.add_to_cart("soap", 10)).to eq ({"soap"=>[10,10]})
 				expect(@shop.add_to_cart("brush", 10)).to eq ({"soap"=>[10,10],"brush"=>[10,10]})
+			end
+		end
+	end
+	describe '#update_inventory' do
+		before do
+			@products = [
+				{name:"soap", price: 10, quantity: 10},
+				{name:"brush", price: 10, quantity: 10}
+			]
+			@codes = [
+				{code:"CODE", discount:10}
+			]
+			@shop = Shop.new()
+		end
+		context 'When Testing the update inventory method ' do
+			it 'update the products and codes' do 
+				@shop.update_inventory(@products, @codes)
+				expect(@shop.products).to eq (@products)
+				expect(@shop.codes).to eq (@codes)
 			end
 		end
 	end
