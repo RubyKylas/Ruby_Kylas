@@ -25,9 +25,9 @@ class Cart
         return (amount * 0.2)
       elsif amount > 100
         return (amount * 0.1)
+      else
+        return amount * 0.05
       end
-  
-      (amount * 0.05)
     end
   
     def cal_gross_bill
