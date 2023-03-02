@@ -28,7 +28,7 @@ class Shop
         need = product[:quantity]
         @products.delete_at(index)
       else
-        @products.map do |x|
+        @products.map! do |x|
           x[:quantity] - need if x[:name] == name
         end
       end
