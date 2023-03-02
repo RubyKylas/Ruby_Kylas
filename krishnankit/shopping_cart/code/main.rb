@@ -8,7 +8,7 @@ while 1
   print "Your option: "
   user_input = gets.chomp.to_i
   puts "Mocked."
-  case user_input
+  case (user_input)
     when 0
       break
     when 1

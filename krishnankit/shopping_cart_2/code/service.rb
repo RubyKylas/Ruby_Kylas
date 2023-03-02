@@ -9,7 +9,7 @@ end
 class Inventory
   attr_accessor :products
 
-  def initialize
+  def initialize()
     @products = Array.new
   end
 
@@ -18,7 +18,7 @@ class Inventory
     return @products
   end
 
-  def display
+  def display()
     @products.each do |p|
       puts "Name: #{p[0].name}."
       puts "Price: #{p[0].price}."
@@ -29,7 +29,7 @@ end
 
 class Cart
   attr_accessor :products
-  def initialize
+  def initialize()
     @products = []
   end
 
@@ -47,18 +47,23 @@ class Cart
     return @products
   end
 
-  def delete_product(name)
+  def delete_product(name, products)
     product = @products.find{|p| p[0].name == name}
-    if !product
+    if (!product)
       puts "Product not found in cart."
     else
+      products.each do |p|
+        if (p[0].name == name)
+          p[1] += product[1]
+        end
+      end
       @products.delete_if{|p| p[0].name == name}
       puts "Product deleted successfully."
     end
     return @products
   end
 
-  def display
+  def display()
     @products.each do |p|
         puts "Name: #{p[0].name}."
         puts "Price: #{p[0].price}."
@@ -73,7 +78,7 @@ class Cart
       @price += p[0].price * p[1]
     end    
 
-    case code
+    case (code)
     when "FIRST"
       puts "You got 20% discount!"
       @discount = 0.2

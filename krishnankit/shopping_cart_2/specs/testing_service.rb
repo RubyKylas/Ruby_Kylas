@@ -179,13 +179,16 @@ describe "cart.delete_product" do
     begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
+      products = [[apple, 7], [asus, 10]]
       cart = Cart.new
       cart.products = [[apple, 3], [asus, 2]]
       name = "Apple"
     end
     it "The product should be removed from cart."  do
-      result = cart.delete_product(name)
+      result = cart.delete_product(name, products)
       expect(result).to eq [[asus, 2]]
+      product = products.find {|p| p[0].name == name}
+      expect(product[1]).to eq (10)
     end
   end
 
@@ -193,13 +196,14 @@ describe "cart.delete_product" do
     begin
       apple = Product.new('Apple', 50000)
       asus = Product.new('Asus', 15000)
+      products = [[apple, 9], [asus, 10]]
       cart = Cart.new
       cart.products = [[apple, 3], [asus, 2]]
       name = "Realme"
     end
     it "User should see Product not found in cart."  do
       expect do
-        cart.delete_product(name)
+        cart.delete_product(name, products)
       end.to output("Product not found in cart.\n").to_stdout
     end
   end

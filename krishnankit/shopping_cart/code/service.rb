@@ -16,7 +16,7 @@ end
 
 def add_to_cart(products, cart, name, quantity)
   prod = products.find {|x| x[0] == name}
-  if prod
+  if (prod)
     cart.push([name, prod[1], quantity])
     prod[2] -= quantity
   end
@@ -40,7 +40,7 @@ def generate_bill(cart, code)
   cart.each do |x|
     price  = price + (x[1] * x[2])
   end
-  case code
+  case (code)
     when "FIRST"
       discount = 0.2
       puts "You got 20% discount!"

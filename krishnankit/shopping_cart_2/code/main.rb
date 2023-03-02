@@ -36,7 +36,7 @@ while 1
     when 6
       print "Enter the name of product you want to delete: "
       name = gets.chomp.downcase
-      cart.delete_product(name)
+      cart.delete_product(name, inventory.products)
     else
       puts "Plese enter valid input."
   end
