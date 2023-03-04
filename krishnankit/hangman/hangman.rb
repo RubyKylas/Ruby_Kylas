@@ -3,16 +3,16 @@ word = WORDS.sample.split("")
 
 def hangman(word)   
   len = word.length
-  dashes = Array.new(len, "-")
+  dashes = "-" * len
   chances = 6
   right = 0
   while right < len
     if chances == 0
       puts "Game over!"
       puts  "The word was #{word.join("")}"
-      break
+      return "You Lost!"
     end
-    p dashes.join("")
+    puts dashes
     print "Enter the character: "
     char = gets.chomp.downcase
     if !char.match?(/[[:alpha:]]/)
@@ -33,7 +33,9 @@ def hangman(word)
       chances -= 1
     end
     if len == right
+      puts dashes
       puts "You Won!"
+      return "You Won!"
     end
   end
 end
