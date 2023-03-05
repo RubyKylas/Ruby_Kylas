@@ -1,123 +1,102 @@
-require "./main.rb"
+require './main'
+
+describe Menu do
+  let(:obj) {Menu.new}
+
+  describe "add_to_menu" do
+    it "it should add the new product in the stock" do
+      obj.add_to_menu("Tshirt", 250, 30)
+      expect(obj.menu).to eq({"Tshirt"=>{:price=>250, :quantity=>30}, "Apple"=>{:price=>200, :quantity=>20}, "Mobile" => {:price => 20000, :quantity => 35}, "Watch" => {:price => 3999, :quantity => 15}})
+    end
+  end
+
+  describe "print_menu" do
+    it "it should display all products inside menu" do
+      expect{obj.print_menu()}.to output("Name | Price | Quantity\nApple    200      20   \nMobile    20000      35   \nWatch    3999      15   \n").to_stdout
+    end
+  end
+
+end
 
 describe Cart do
-  describe "#cal_gst"
-    context "calculate GST on gross_amount" do      
-      before do
-        s_gst = 8
-        c_gst = 8
-      end      
-      it "return GST amount on gross_amount" 
-        true_amount = (gross_amount / 100) * (c_gst + s_gst)
-        gst_amount = cal_gst(amount)
-        expect(gst_amount).to eq(true_amount)
-      end
-    end  
-  end  
-end 
+  let(:m) {Menu.new}
+  let(:obj) {Cart.new(m)}
 
-  describe "#cal_discount"
-    context "calculate discount amount on gross_amount" do
-      it "return discount amount on gross_amount" 
-        true_amount = amount > 300 ? amount * 0.3 : amount > 200 ? amount * 0.2 : amount >   100 ? amount * 0.1 : amount * 0.05
-        discount_amount = cal_gst(amount)
-        expect(discount_amount).to eq(true_amount)
-      end
-    end  
-  end  
-
-  describe "#cal_gross_bill"
-    context "calculate gross_amount" do
+  describe "add_to_cart" do
+    context "successfully adds product because" do
       before do
-        cart = { 1 => { name: 'bb', price: 30, quantity: 10 }, 2 => { name: 'cc', price: 40,   quantity: 7 }} 
+        m.menu = {"Laptop" => {:price => 80000, :quantity => 2}}
+      end
+      it "product exists in the stock" do
+        obj.add_to_cart("Laptop", 1)
+        expect(obj.cart).to eq({"Laptop" => {:price => 80000, :quantity => 1},"Apple" => {:price => 200, :quantity => 10}})
+      end
+    end
+    
+    context "fails to add product because" do
+      it "product does not exists" do
+        obj.add_to_cart("Laptop", 2)
+        expect{obj.add_to_cart("Laptop", 2)}.to output("We do not have Laptop item in menu.\n").to_stdout
+      end
+    end     
+  end
+
+  describe "print_cart" do
+    it "it should display all products inside menu" do
+      expect{obj.print_cart()}.to output("Name | Price | Quantity\nApple    200      10   \n").to_stdout
+    end
+  end
+
+  describe "remove_from_cart" do
+    context "successfully removes product because" do
+      it "quantity to be removed is less than or equal to available quantity in cart" do 
+        obj.remove_from_cart("Apple", 8)
+        expect(obj.cart).to eq({"Apple" => {:price => 200, :quantity => 2}}) 
+      end 
+    end
+    
+    context "fails to removes product because" do
+      it "quantity to be removed is greater than available quantity in cart" do 
+        obj.remove_from_cart("Apple", 12)
+        expect(obj.cart).to eq({"Apple" => {:price => 200, :quantity => 10}}) 
       end 
       
-      it "return  total gross_amount"       
-        expect(cal_gross_bill(cart)).to eq(580)
-      end
-    end  
-  end  
+      it "product does not exists in cart" do 
+        obj.remove_from_cart("TV", 1)
+        expect(obj.cart).to eq({"Apple" => {:price => 200, :quantity => 10}}) 
+      end 
+    end
+  end 
+  
+  describe "make_bill" do
+    before do
+      obj.cart = {"Apple" => {:price => 200, :quantity => 10}, "Mobile" => {:price => 20000, :quantity => 2}}
+      @gross_amount = 0.0
+    end
 
-  describe "#make_bill"
-   context "calculate gross_amount" do
-     before do
-       cart = { 1 => { name: 'bb', price: 30, quantity: 10 }, 2 => { name: 'cc', price: 40, quantity: 7 }} 
-     end 
-     
-     it "return  total gross_amount"       
-       expect(make_bill(cart)).to eq(498.79999999999995)
-     end
-   end  
-  nd  
+    context "calculate_gross_bill" do
+      it "calculates gross bill of all products in cart" do 
+        @gross_amount = obj.calculate_gross_bill()
+        expect(@gross_amount).to eq(42000.0) 
+      end 
+    end
 
-  describe "#add_to_menu"
-    context "adding item to menu" do
-      before do
-        menu = { 1 => { name: 'aa', price: 10, quantity: 10 }, 2 => { name: 'bb', price: 30,   quantity: 10 }, 3 => { name: 'cc', price: 40, quantity: 7 }} 
+    context "calculate_gst" do
+      it "calculates total gst applicable over gross bill of all products in cart" do 
+        expect(obj.calculate_gst(42000)).to eq(6720.0) 
+      end 
+    end
+
+    context "calulate_discount" do
+      it "calculates total discount applicable over gross bill of all products in cart" do 
+        expect(obj.calulate_discount(42000)).to eq(12600.0) 
+        expect{obj.calulate_discount(42000)}.to output("We have 10%, 20% and 30% discount based on your bill\nYour discount amount is: 12600.0\n").to_stdout
       end 
       
-      it "item gets added successfully, in menu key for that item id should return true"       
-        expect_any_instance_of(Kernel).to receive(:gets).and_return("apple\n","60\n","15\n")
-        expect(menu.key?(4)).to eq(true)
-      end
-    end  
+      it "prints correct message" do 
+        expect{obj.calulate_discount(42000)}.to output("We have 10%, 20% and 30% discount based on your bill\nYour discount amount is: 12600.0\n").to_stdout
+      end 
+    end
   end 
 
-  describe "#add_to_cart"
-    context "adding item to cart" do
-      before do
-        cart = { 1 => { name: 'bb', price: 30, quantity: 10 }, 2 => { name: 'cc', price: 40,   quantity: 7 } }
-        menu = { 1 => { name: 'aa', price: 10, quantity: 10 }, 2 => { name: 'bb', price: 30,   quantity: 10 }, 3 => { name: 'cc', price: 40, quantity: 7 }, 4 => { name: 'dd', price:   70, quantity: 10 }, 5 => { name: 'ee', price: 90, quantity: 10 } }
-      end 
-      
-      it "item gets added successfully, quantity for that item in cart should increase"       
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(3)
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(6)
-        add_to_cart(3, 6, menu, cart)
-        expect(cart[3][:quantity]).to eq(6)
-      end
-      
-      it "item gets added successfully quantity for that item in menu should decrease"       
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(3)
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(6)
-        add_to_cart(3, 6, menu, cart)
-        expect(menu[3][:quantity]).to eq(1)
-      end
-      
-      it "menu does not have sufficient quantity cart size should remain as before"       
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(3)
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(8)
-        add_to_cart(3, 8, menu, cart)
-        expect(cart.size).to eq(2)
-      end
-      
-      it "menu does not have sufficient quantity, menu should retain quantity of that   product"       
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(3)
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(8)
-        add_to_cart(3, 8, menu, cart)
-        expect(menu[3][:quantity]).to eq(7)
-      end
-      
-      it "item does not exists, in menu key for that item id should return false"       
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(6)
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(8)
-        add_to_cart(6, 8, menu, cart)
-        expect(menu.key?(6)).to eq(false)
-      end
-    end  
-  end 
-
-  describe "#remove_item_from_cart"
-    context "removing item from cart" do
-      before do
-        cart = { 1 => { name: 'bb', price: 30, quantity: 10 }, 2 => { name: 'cc', price: 40, quantity: 7 } }
-      end 
-      
-      it "item gets removed successfully, in cart key for that item id should return false"       
-        expect_any_instance_of(Kernel).to receive(:gets).and_return(2)
-        remove_item_from_cart(2, cart)
-        expect(cart.key?(2)).to eq(false)
-      end
-    end  
-  end 
 end
