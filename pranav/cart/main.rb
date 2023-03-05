@@ -25,7 +25,7 @@ m1 = Menu.new
 
 class Cart 
   attr_accessor :cart
-  attr_accessor :m1
+  attr_accessor :menu_object
   def initialize(m)
     @cart = {"Apple" => {:price => 200, :quantity => 10}}
     @menu_object = m
@@ -85,9 +85,9 @@ class Cart
 
   def calculate_gst(amount)
     gst_amount = 0.0
-    s_gst = 8
-    c_gst = 8
-    gst_amount = (amount / 100) * (c_gst + s_gst)
+    state_gst = 8
+    central_gst = 8
+    gst_amount = (amount / 100) * (state_gst + central_gst)
     puts "Your GST amount is #{gst_amount}"
     gst_amount
   end
