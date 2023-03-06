@@ -6,15 +6,15 @@ class Shopping_cart
 
   def AddTo_cart(cart, ary)
 
-    print 'Enter the product name: '
+    #print 'Enter the product name: '
     prdName = gets
-    puts prdName
+    #puts prdName
     @@ary = [["apple",120,5], ["orange",150,10]]
     @@cart = []
     abc = @@ary.find{ |x| x[0] == prdName }
 
     if abc
-      print 'Enter qunatity of ', prdName, ' '
+     # print 'Enter qunatity of ', prdName, ' '
       prdQuan = gets 
       @@cart.push([prdName, abc[1], prdQuan])
     else
@@ -25,14 +25,14 @@ class Shopping_cart
   end
       
   def Display_cart(cart)
-    puts '\ndisplaying your cart'
+    #puts '\ndisplaying your cart'
     @@cart = [["apple", 120, 5]]
 
     if @@ary.length == 0
       return 'inventory is empty'
     else
-      puts ' '
-      puts 'Name  Cost  Quantity'
+    #  puts ' '
+     # puts 'Name  Cost  Quantity'
       @@cart.each do |r|
         puts r.each { |p| p }. join(' ')
       end
