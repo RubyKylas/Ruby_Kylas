@@ -1,44 +1,45 @@
-#shopping cart 
+# rubocop:disable Metrics/MethodLength
+# shopping cart
 class Inventory
   
-  @@ary = Array.new{{}}
-  @@cart = Array.new{{}}
+  @@ary = Array.new { {} }
+  @@cart = Array.new { {} }
   
-  def Add_Products(ary)
+  def add_products(_ary)
 
     print 'Enter product name: '
-    productName = gets
-    @givenArray = [["orange",120,5]]
+    product_name = gets
+    @given_array = [['orange', 120, 5]]
 
-    if @givenArray.find { |x| x[0] == productName }
+    if @given_array.find { |x| x[0] == product_name }
       puts 'You cant use same name as previous product'
-      return 'product exist'
+      'product exist'
     else
       print 'enter product value: '
-      productValue = gets
+      product_value = gets
       print 'Enter product quantity: '
-      productQuantity = gets
-      @@ary.push([productName, productValue, productQuantity])
+      product_quantity = gets
+      @@ary.push([product_name, product_value, product_quantity])
     end
   end
 
-  def DisplayAll(ary)
+  def display_all(_ary)
     puts '\ndisplaying all the products'
     puts ' '
-    @@ary = [["apple",120,5], ["orange",150,10]]
+    @@ary = [['apple', 120, 5], ['orange', 150, 10]]
 
     if @@ary.empty?
-      return 'inventory is empty'
+      'inventory is empty'
     else
       puts 'Name  Cost  Quantity'
       @@ary.each do |r|
-        puts r.each { |p| p }. join(' ')
+        puts r.each { |p| }.join(' ')
       end
-      return @@ary
+      @@ary
     end
   end
 
-  def Display_menu
+  def display_menu
     puts '1. Create Inventory'
     puts '2. Add to cart'
     puts '3. Display all Products avaialble'
@@ -50,4 +51,4 @@ class Inventory
   end
 end
   
-  #shopping cart
+# shopping cart
